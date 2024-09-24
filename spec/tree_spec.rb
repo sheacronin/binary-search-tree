@@ -68,3 +68,19 @@ describe 'find' do
     expect(tree.find(2)).to have_attributes(data: 2, left_child: Node.new(1), right_child: Node.new(3))
   end
 end
+
+describe 'level order' do
+  it 'returns array of data in level order if no block given' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    expect(tree.level_order).to eq([4, 2, 6, 1, 3, 5])
+  end
+
+  it 'works with a block' do
+    tree = Tree.new([1, 2, 3])
+    result = tree.level_order do |node|
+      node.data = node.data * 2
+      node
+    end
+    expect(result).to eq([4, 2, 6])
+  end
+end

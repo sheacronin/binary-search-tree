@@ -56,6 +56,19 @@ class Tree
     end
   end
 
+  def level_order(&block)
+    queue = [root]
+    data = []
+    until queue.empty?
+      node = queue.shift
+      queue << node.left_child if node.left_child
+      queue << node.right_child if node.right_child
+      node = block.call(node) if block
+      data << node.data
+    end
+    data
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
