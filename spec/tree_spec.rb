@@ -84,3 +84,51 @@ describe 'level order' do
     expect(result).to eq([4, 2, 6])
   end
 end
+
+describe 'preorder' do
+  it 'works without a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    expect(tree.preorder).to eq([4, 2, 1, 3, 6, 5])
+  end
+
+  it 'works with a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    result = tree.preorder do |node|
+      node.data += 1
+      node
+    end
+    expect(result).to eq([5, 3, 2, 4, 7, 6])
+  end
+end
+
+describe 'inorder' do
+  it 'works without a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    expect(tree.inorder).to eq([1, 2, 3, 4, 5, 6])
+  end
+
+  it 'works with a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    result = tree.inorder do |node|
+      node.data += 1
+      node
+    end
+    expect(result).to eq([2, 3, 4, 5, 6, 7])
+  end
+end
+
+describe 'postorder' do
+  it 'works without a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    expect(tree.postorder).to eq([1, 3, 2, 5, 6, 4])
+  end
+
+  it 'works with a block' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    result = tree.postorder do |node|
+      node.data += 1
+      node
+    end
+    expect(result).to eq([2, 4, 3, 6, 7, 5])
+  end
+end

@@ -69,6 +69,39 @@ class Tree
     data
   end
 
+  def preorder(node = root, data = [], &block)
+    return if node.nil?
+
+    node = block.call(node) if block
+    data << node.data
+    preorder(node.left_child, data, &block)
+    preorder(node.right_child, data, &block)
+
+    data
+  end
+
+  def inorder(node = root, data = [], &block)
+    return if node.nil?
+
+    inorder(node.left_child, data, &block)
+    node = block.call(node) if block
+    data << node.data
+    inorder(node.right_child, data, &block)
+
+    data
+  end
+
+  def postorder(node = root, data = [], &block)
+    return if node.nil?
+
+    postorder(node.left_child, data, &block)
+    postorder(node.right_child, data, &block)
+    node = block.call(node) if block
+    data << node.data
+
+    data
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
