@@ -132,3 +132,10 @@ describe 'postorder' do
     expect(result).to eq([2, 4, 3, 6, 7, 5])
   end
 end
+
+describe 'height' do
+  it 'returns number of edges in longest path from a given node to a leaf node' do
+    tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 12, 18, 17, 10, 11])
+    expect(tree.height).to be(4)
+  end
+end

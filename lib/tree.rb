@@ -102,8 +102,18 @@ class Tree
     data
   end
 
+  def height(node = root, height = 0)
+    return 0 if node.nil?
+
+    left_height = height(node.left_child, 1)
+    right_height = height(node.right_child, 1)
+
+    height + (left_height > right_height ? left_height : right_height)
+  end
+
   # Written by The Odin Project student to visualize Tree
-  def pretty_print(node = @root, prefix = '', is_left = true)
+  def pretty_print(node = root, prefix = '', is_left = true)
+    puts "\n" if node == root
     pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_child
