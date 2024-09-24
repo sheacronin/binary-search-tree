@@ -50,10 +50,21 @@ describe 'delete' do
 
   it 'deletes a node with 2 children' do
     tree = Tree.new([1, 2, 3, 4, 5, 6])
-    # tree.pretty_print
     tree.delete(2)
     left_child = Node.new(3)
     right_child = Node.new(6)
     expect(tree.root).to have_attributes(data: 4, left_child:, right_child:)
+  end
+end
+
+describe 'find' do
+  it 'returns node with value' do
+    tree = Tree.new([1, 2, 3])
+    expect(tree.find(3)).to have_attributes(data: 3, left_child: nil, right_child: nil)
+  end
+
+  it 'returns node that has children' do
+    tree = Tree.new([1, 2, 3, 4, 5, 6])
+    expect(tree.find(2)).to have_attributes(data: 2, left_child: Node.new(1), right_child: Node.new(3))
   end
 end

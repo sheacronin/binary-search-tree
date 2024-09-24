@@ -47,6 +47,15 @@ class Tree
     end
   end
 
+  def find(value)
+    current_node = root
+    while current_node
+      return current_node if value == current_node.data
+
+      current_node = next_node(value, current_node)
+    end
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
@@ -78,5 +87,13 @@ class Tree
     node.data = replacement.data
     node.right_child = delete(replacement.data, node.right_child)
     node
+  end
+
+  def next_node(value, node)
+    if value < node.data
+      node.left_child
+    elsif value > node.data
+      node.right_child
+    end
   end
 end
