@@ -111,6 +111,16 @@ class Tree
     height + (left_height > right_height ? left_height : right_height)
   end
 
+  def depth(node)
+    depth = 0
+    postorder do |current|
+      node = current if [current.right_child, current.left_child].include?(node)
+      depth += 1 if current == node && current != root
+      current
+    end
+    depth
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = root, prefix = '', is_left = true)
     puts "\n" if node == root

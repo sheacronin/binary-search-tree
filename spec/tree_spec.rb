@@ -139,3 +139,10 @@ describe 'height' do
     expect(tree.height).to be(4)
   end
 end
+
+describe 'depth' do
+  it 'returns number of edges in path from a given node to the tree’s root node' do
+    tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 12, 18, 17, 10, 11])
+    expect(tree.depth(Node.new(10))).to be(3)
+  end
+end
