@@ -35,10 +35,48 @@ class Tree
     end
   end
 
+  def delete(value, current_node = root)
+    return nil if current_node.nil?
+
+    if value < current_node.data
+      current_node.left_child = delete(value, current_node.left_child)
+    elsif value > current_node.data
+      current_node.right_child = delete(value, current_node.right_child)
+    else # Delete this node with the value
+      handle_deletion(current_node)
+    end
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_child
+  end
+
+  private
+
+  def handle_deletion(node)
+    # Leaf node
+    return nil if node.left_child.nil? && node.right_child.nil?
+
+    # Node with one child
+    if node.left_child.nil?
+      return node.right_child
+    elsif node.right_child.nil?
+      return node.left_child
+    end
+
+    # Node with two children
+    delete_with_two_children(node)
+  end
+
+  def delete_with_two_children(node)
+    replacement = node.right_child
+    replacement = replacement.left_child while replacement.left_child
+
+    node.data = replacement.data
+    node.right_child = delete(replacement.data, node.right_child)
+    node
   end
 end

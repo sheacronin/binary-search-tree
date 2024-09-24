@@ -7,6 +7,8 @@ class Node
   attr_accessor :data, :left_child, :right_child
 
   def <=>(other)
+    return if other.nil?
+
     data <=> other.data
   end
 
