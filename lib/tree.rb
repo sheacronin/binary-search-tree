@@ -121,6 +121,13 @@ class Tree
     depth
   end
 
+  def balanced?
+    left_height = height(root.left_child)
+    right_height = height(root.right_child)
+    diff = left_height - right_height
+    diff.abs <= 1
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = root, prefix = '', is_left = true)
     puts "\n" if node == root

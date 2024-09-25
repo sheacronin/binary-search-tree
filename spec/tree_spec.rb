@@ -146,3 +146,18 @@ describe 'depth' do
     expect(tree.depth(Node.new(10))).to be(3)
   end
 end
+
+describe 'balanced?' do
+  it 'returns true for a balanced tree' do
+    tree = Tree.new([1, 2, 3])
+    expect(tree.balanced?).to be(true)
+  end
+
+  it 'returns false for an unbalanced tree' do
+    tree = Tree.new([1, 2, 3, 4])
+    tree.insert(5)
+    tree.insert(6)
+    tree.insert(7)
+    expect(tree.balanced?).to be(false)
+  end
+end
