@@ -128,6 +128,10 @@ class Tree
     diff.abs <= 1
   end
 
+  def rebalance
+    @root = build_tree(inorder)
+  end
+
   # Written by The Odin Project student to visualize Tree
   def pretty_print(node = root, prefix = '', is_left = true)
     puts "\n" if node == root

@@ -161,3 +161,14 @@ describe 'balanced?' do
     expect(tree.balanced?).to be(false)
   end
 end
+
+describe 'rebalance' do
+  it 'balances an unbalanced tree' do
+    tree = Tree.new([1, 2, 3])
+    tree.insert(4)
+    tree.insert(5)
+    expect(tree.balanced?).to be(false)
+    tree.rebalance
+    expect(tree.balanced?).to be(true)
+  end
+end
